@@ -18,6 +18,8 @@ public abstract class AbsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityStack.push(this);
+
+
     }
 
 
