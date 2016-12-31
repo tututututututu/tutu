@@ -5,10 +5,11 @@
 
     <string name="prompt_username">手机号码</string>
     <string name="prompt_password">密码(至少6位)</string>
-    <string name="error_invalid_username">用户名不合法</string>
-    <string name="error_invalid_password">密码不合法</string>
+    <string name="error_invalid_username">手机号不正确</string>
+    <string name="error_invalid_password">密码至少6位</string>
     <string name="error_incorrect_password">密码不正确</string>
     <string name="error_field_required">请填写手机号</string>
     <string name="logining">登录中...</string>
     <string name="login">登录</string>
+    <string name="regist">注册</string>
 </resources>
