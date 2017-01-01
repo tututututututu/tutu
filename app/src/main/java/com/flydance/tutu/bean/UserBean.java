@@ -1,20 +1,16 @@
 package com.flydance.tutu.bean;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by tutu on 2016/12/31.
  */
 
-public class UserBean extends BmobObject{
-	//用户名
-	String userName;
-	//密码
-	String userPsw;
+public class UserBean extends BmobUser {
 	//性别
 	String sex;
 	//等级
-	String level;
+	Integer level;
 	//昵称
 	String nickName;
 	//头像地址
@@ -27,22 +23,6 @@ public class UserBean extends BmobObject{
 
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserPsw() {
-		return userPsw;
-	}
-
-	public void setUserPsw(String userPsw) {
-		this.userPsw = userPsw;
-	}
-
 	public String getSex() {
 		return sex;
 	}
@@ -51,11 +31,11 @@ public class UserBean extends BmobObject{
 		this.sex = sex;
 	}
 
-	public String getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
@@ -81,5 +61,17 @@ public class UserBean extends BmobObject{
 
 	public void setExtra(String extra) {
 		this.extra = extra;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UserBean{" +
+			"sex='" + sex + '\'' +
+			", level='" + level + '\'' +
+			", nickName='" + nickName + '\'' +
+			", portraits='" + portraits + '\'' +
+			", extra='" + extra + '\'' +
+			'}';
 	}
 }

@@ -1,31 +1,45 @@
 package com.flydance.tutu.login;
 
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.flydance.basemodule.utils.RegexUtils;
 import com.flydance.basemodule.utils.ResourceUtils;
-import com.flydance.tutu.AppUI.Toast;
 import com.flydance.tutu.R;
+import com.flydance.tutu.app.Constant;
 import com.flydance.tutu.base.BaseActivity;
+import com.flydance.tutu.main.MainActivity;
 import com.flydance.tutu.regist.RegistActivity;
+import com.jakewharton.rxbinding.view.RxView;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
-import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
-	@Bind(R.id.email)
-	EditText email;
-	@Bind(R.id.password)
-	EditText password;
+
+	LoginContract.Presenter presenter;
+	@Bind(R.id.et_username)
+	EditText etUsername;
+	@Bind(R.id.et_psw)
+	EditText etPsw;
+	@Bind(R.id.btn_login)
+	Button btnLogin;
+	@Bind(R.id.tv_regist)
+	TextView tvRegist;
+	@Bind(R.id.login_form)
+	ScrollView loginForm;
+	@Bind(R.id.base_layout)
+	LinearLayout baseLayout;
 
 
 	@Override
@@ -41,16 +55,30 @@ public class LoginActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		presenter = new LoginPresenter(this);
+		presenter.start();
 
+		initBind();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	private void initBind() {
+		RxView.clicks(btnLogin).throttleFirst(Constant.CLICK_INTERVER, TimeUnit.MILLISECONDS)
+			.subscribe(new Action1<Void>() {
+				@Override
+				public void call(Void aVoid) {
+					presenter.login(getUserName(), getUserPsw());
+				}
+			});
 
-		if (item.getItemId() == android.R.id.home) {
-			finish();
-		}
-		return super.onOptionsItemSelected(item);
+
+		RxView.clicks(tvRegist).throttleFirst(Constant.CLICK_INTERVER, TimeUnit.MILLISECONDS)
+			.subscribe(new Action1<Void>() {
+				@Override
+				public void call(Void aVoid) {
+					Intent intent = new Intent(LoginActivity.this, RegistActivity.class);
+					startActivity(intent);
+				}
+			});
 	}
 
 
@@ -59,61 +87,53 @@ public class LoginActivity extends BaseActivity {
 
 	}
 
-	@OnClick({R.id.email_sign_in_button, R.id.tv_regist})
-	public void onClick(View view) {
-		Intent intent;
-		switch (view.getId()) {
-			case R.id.email_sign_in_button:
-				break;
-			case R.id.tv_regist:
-				intent = new Intent(this, RegistActivity.class);
-				startActivity(intent);
-				break;
-		}
+
+	@Override
+	public void onLoginSuccess() {
+		cancelLoading();
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+		finish();
 	}
 
-
-	private void attemptLogin() {
-		// Reset errors.
-		email.setError(null);
-		password.setError(null);
-
-		String emailString = email.getText().toString();
-		String passwordString = password.getText().toString();
-
-		boolean cancel = false;
-		View focusView = null;
-
-
-		if (TextUtils.isEmpty(emailString)) {
-			Toast.showErrorToast(getString(R.string.error_field_required));
-			focusView = email;
-			cancel = true;
-		} else if (!isEmailValid(emailString)) {
-			Toast.showErrorToast(getString(R.string.error_invalid_username));
-			focusView = email;
-			cancel = true;
-		} else if (!isPasswordValid(passwordString)) {
-			Toast.showErrorToast(getString(R.string.error_invalid_password));
-			focusView = password;
-			cancel = true;
-		}
-
-		if (cancel) {
-			focusView.requestFocus();
-		} else {
-			//请求登录
-			Toast.showErrorToast(getString(R.string.error_invalid_username));
-		}
+	@Override
+	public void onLoginFail(String msg) {
+		cancelLoading();
 	}
 
-	private boolean isEmailValid(String email) {
-
-		return RegexUtils.isMobileExact(email);
+	@Override
+	public String getUserName() {
+		return etUsername.getText().toString().trim();
 	}
 
-	private boolean isPasswordValid(String password) {
-		return password.length() > 6;
+	@Override
+	public String getUserPsw() {
+		return etPsw.getText().toString().trim();
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		etUsername.setText(userName);
+	}
+
+	@Override
+	public void setPsw(String psw) {
+		etPsw.setText(psw);
+	}
+
+	@Override
+	public void showLoading(String msg) {
+		showLoadingDialog(msg);
+	}
+
+	@Override
+	public void cancelLoading() {
+		cancelLoadingDialog();
+	}
+
+	@Override
+	public void setPresenter(LoginContract.Presenter presenter) {
+		this.presenter = presenter;
 	}
 
 }

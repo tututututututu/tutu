@@ -2,6 +2,8 @@ package com.flydance.tutu.app;
 
 import android.app.Application;
 
+import com.flydance.basemodule.utils.L;
+import com.flydance.basemodule.utils.SPUtils;
 import com.flydance.basemodule.utils.Utils;
 
 /**
@@ -17,6 +19,16 @@ public class App extends Application {
 		super.onCreate();
 		app = this;
 		initUtils();
+		initSP();
+		initLoger();
+	}
+
+	private void initLoger() {
+		L.initLoger();
+	}
+
+	private void initSP() {
+		SPUtils.initSP("data");
 	}
 
 	private void initUtils() {

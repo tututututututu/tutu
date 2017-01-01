@@ -19,6 +19,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
 }
 
 dependencies {
@@ -31,4 +37,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
     compile 'com.bigkoo:svprogresshud:1.0.6'
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
 }

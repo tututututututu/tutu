@@ -1,8 +1,7 @@
-package com.flydance.tutu.regist;
+package com.flydance.tutu.login;
 
 import android.text.TextUtils;
 
-import com.flydance.basemodule.utils.L;
 import com.flydance.basemodule.utils.RegexUtils;
 import com.flydance.basemodule.utils.SPUtils;
 import com.flydance.tutu.AppUI.Toast;
@@ -20,42 +19,48 @@ import static com.flydance.basemodule.utils.ResourceUtils.getString;
  * Created by tutu on 2016/12/31.
  */
 
-public class RegistPresenter implements RegistContract.Presenter {
-	private RegistContract.View view;
-	private RegistModel registModel;
+public class LoginPresenter implements LoginContract.Presenter {
+	private LoginContract.View view;
+	private LoginModel loginModel;
 
 
-	public RegistPresenter(RegistContract.View view) {
+	public LoginPresenter(LoginContract.View view) {
 		this.view = view;
 		view.setPresenter(this);
-		registModel = new RegistModel();
+		loginModel = new LoginModel();
 	}
 
 	@Override
-	public void regist(final String userName, final String userPsw) {
-
-		UserBean userBean = new UserBean();
-		userBean.setUsername(userName);
-		userBean.setPassword(userPsw);
+	public void login(final String userName, final String userPsw) {
 		if (!verifyInput(userName, userPsw)) {
 			return;
 		}
-		view.showLoading("请稍候...");
-		registModel.regist(userBean)
+
+
+		//使用缓存用户登录
+		if (UserBean.getCurrentUser() != null && UserBean.getCurrentUser().getUsername().equals(userName) && userPsw
+			.equals("******")) {
+			//直接登陆成功
+			view.onLoginSuccess();
+			return;
+		}
+
+
+		view.showLoading("登陆中...");
+		loginModel.login(userName, userPsw)
 			.compose(RxHelper.ThreadScheduler())
 			.onErrorReturn(new HanderError())
 			.subscribe(new Action1<Object>() {
 				@Override
 				public void call(Object o) {
-					view.cancelLoading();
-					L.i(RegistPresenter.class.getSimpleName(), o);
-					if (o == null) {
-						view.onRegistFail("注册失败");
+					if (o != null) {
+						//登陆成功
+						SPUtils.putString(Constant.USER_PORTRAINS, ((UserBean) o).getPortraits());
+						SPUtils.putString(Constant.USER_NICKNAME, ((UserBean) o).getNickName());
+						view.onLoginSuccess();
 					} else {
-						view.onRegistSuccess();
-						SPUtils.putString(Constant.USER_NAME, userName);
-						SPUtils.putString(Constant.USER_PSW, userPsw);
-						SPUtils.putString(Constant.USER_ID, ((UserBean) o).getObjectId() + "");
+						view.cancelLoading();
+						view.onLoginFail("登陆失败");
 					}
 				}
 			});
@@ -63,6 +68,11 @@ public class RegistPresenter implements RegistContract.Presenter {
 
 	@Override
 	public void start() {
+		if (UserBean.getCurrentUser() != null && !TextUtils.isEmpty(UserBean.getCurrentUser().getUsername())) {
+			view.setUserName(UserBean.getCurrentUser().getUsername());
+			view.setPsw("******");
+		}
+
 
 	}
 

@@ -3,6 +3,7 @@ package com.flydance.tutu.base;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +14,11 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.flydance.basemodule.base.AbsActivity;
 import com.flydance.tutu.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
+import rx.internal.util.SubscriptionList;
 
 
 /**
@@ -38,7 +37,7 @@ public abstract class BaseActivity extends AbsActivity {
 	protected Context mBaseActivityContext;
 	protected Context mApplicationContext;
 	public SVProgressHUD svProgressHUD;
-	protected List<Subscription> subscriptions;
+	protected SubscriptionList subscriptionList;
 
 	@Bind(R.id.tv_titel)
 	TextView titleName;
@@ -63,9 +62,10 @@ public abstract class BaseActivity extends AbsActivity {
 				R.color.colorPrimary));
 		}
 
+
 		setContentView(getLayoutID());
 		ButterKnife.bind(this);
-		subscriptions = new ArrayList<>();
+		subscriptionList = new SubscriptionList();
 		svProgressHUD = new SVProgressHUD(this);
 		mBaseActivityContext = this;
 		mApplicationContext = getApplicationContext();
@@ -74,8 +74,8 @@ public abstract class BaseActivity extends AbsActivity {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+		super.onPostCreate(savedInstanceState, persistentState);
 		initTitle(titleName, ivBack, ivMenu, titleRoot);
 	}
 
@@ -97,7 +97,19 @@ public abstract class BaseActivity extends AbsActivity {
 	}
 
 	public void showLoadingDialog(String msg) {
+		if (svProgressHUD == null) {
+			svProgressHUD = new SVProgressHUD(this);
+		}
+		if (svProgressHUD.isShowing()) {
+			svProgressHUD.dismiss();
+		}
 		svProgressHUD.showWithStatus(msg, SVProgressHUD.SVProgressHUDMaskType.None);
+	}
+
+	public void cancelLoadingDialog() {
+		if (svProgressHUD != null && svProgressHUD.isShowing()) {
+			svProgressHUD.dismiss();
+		}
 	}
 
 	@Override
@@ -112,7 +124,7 @@ public abstract class BaseActivity extends AbsActivity {
 
 
 	protected void addSubscription(Subscription subscription) {
-		subscriptions.add(subscription);
+		subscriptionList.add(subscription);
 	}
 
 
@@ -121,20 +133,10 @@ public abstract class BaseActivity extends AbsActivity {
 		hideKeyBoard();
 		super.onDestroy();
 		ButterKnife.unbind(this);
-		for (Subscription subscription : subscriptions) {
-			if (subscription != null && !subscription.isUnsubscribed()) {
-				subscription.unsubscribe();
-			}
+		subscriptionList.unsubscribe();
+
+		if (svProgressHUD != null && svProgressHUD.isShowing()) {
+			svProgressHUD.dismiss();
 		}
 	}
-
-
-	protected void showLoadingDialog(Context context) {
-
-	}
-
-	protected void cancelLoadingDialog() {
-
-	}
-
 }
