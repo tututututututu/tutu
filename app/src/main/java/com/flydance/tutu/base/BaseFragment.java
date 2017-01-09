@@ -3,8 +3,6 @@ package com.flydance.tutu.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.flydance.tutu.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Subscription;
+import rx.internal.util.SubscriptionList;
 
 
 /**
@@ -31,48 +26,29 @@ import rx.Subscription;
  */
 public abstract class BaseFragment extends Fragment {
 
-    //private Unbinder unbinder;
-
-    public abstract void handleMessage(Message msg);
-
-    public abstract void initView();
 
     public abstract int getLayoutID();
+    public abstract void initView();
 
     private InputMethodManager imm;
     protected Context mActivityContext;
-    protected List<Subscription> subscriptions;
+    protected SubscriptionList subscriptions;
 
 
     private View rootView;
-    protected SVProgressHUD svProgressHUD;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            handleMessage(msg);
-        }
-    };
-
-    protected void sendMessage(Message msg) {
-        mHandler.sendMessage(msg);
-        handleMessage(msg);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        subscriptions = new ArrayList<>();
+        subscriptions = new SubscriptionList();
         mActivityContext = getContext();
-        svProgressHUD = ((BaseActivity) getActivity()).getSVProgressHUD();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutID(), null);
-        //unbinder = ButterKnife.bind(this, rootView);
+        ButterKnife.bind(this, rootView);
 //		ViewGroup parent = (ViewGroup) rootView.getParent();
 //		if (parent != null) {
 //			parent.removeView(rootView);
@@ -89,14 +65,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        if (unbinder != null) {
-//            unbinder.unbind();
-//        }
-        for (Subscription subscription : subscriptions) {
-            if (subscription != null && !subscription.isUnsubscribed()) {
-                subscription.unsubscribe();
-            }
-        }
+        ButterKnife.unbind(this);
+        subscriptions.unsubscribe();
     }
 
     @Nullable
@@ -146,7 +116,5 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-
-
     }
 }

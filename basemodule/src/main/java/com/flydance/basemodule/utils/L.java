@@ -1,6 +1,5 @@
 package com.flydance.basemodule.utils;
 
-import com.flydance.basemodule.BuildConfig;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
@@ -17,7 +16,7 @@ public class L {
 			.methodCount(3)                 // default 2
 			//.hideThreadInfo()               // default shown
 			//.logLevel(LogLevel.NONE)        // default LogLevel.FULL
-			.logLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE)        // default LogLevel.FULL
+			.logLevel(LogLevel.FULL)        // default LogLevel.FULL
 			.methodOffset(2);                // default 0
 		//.logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter
 	}

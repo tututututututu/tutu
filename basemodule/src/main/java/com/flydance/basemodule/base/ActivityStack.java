@@ -87,6 +87,7 @@ public class ActivityStack {
         if (clazz == null) {
             return null;
         }
+
         for (int i = activites.size() - 1; i >= 0; i--) {
             AbsActivity activity = activites.elementAt(i);
             if (clazz.equals((activity).getClass().getName())) {
