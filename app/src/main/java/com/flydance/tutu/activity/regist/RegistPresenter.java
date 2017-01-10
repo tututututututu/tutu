@@ -1,16 +1,15 @@
-package com.flydance.tutu.regist;
+package com.flydance.tutu.activity.regist;
 
 import android.text.TextUtils;
 
+import com.flydance.basemodule.http.RxHelper;
 import com.flydance.basemodule.utils.L;
 import com.flydance.basemodule.utils.RegexUtils;
 import com.flydance.basemodule.utils.SPUtils;
-import com.flydance.tutu.AppUI.Toast;
 import com.flydance.tutu.R;
 import com.flydance.tutu.app.Constant;
 import com.flydance.tutu.bean.UserBean;
-import com.flydance.tutu.net.HanderError;
-import com.flydance.tutu.net.RxHelper;
+import com.flydance.tutu.widget.Toast;
 
 import rx.functions.Action1;
 
@@ -42,8 +41,7 @@ public class RegistPresenter implements RegistContract.Presenter {
 		}
 		view.showLoading("请稍候...");
 		registModel.regist(userBean)
-			.compose(RxHelper.ThreadScheduler())
-			.onErrorReturn(new HanderError())
+			.compose(RxHelper.<UserBean>switchSchedulers())
 			.subscribe(new Action1<Object>() {
 				@Override
 				public void call(Object o) {

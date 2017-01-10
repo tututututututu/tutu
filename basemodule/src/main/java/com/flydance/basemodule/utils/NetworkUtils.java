@@ -82,7 +82,7 @@ public class NetworkUtils {
     }
 
     /**
-     * 判断网络是否可用
+     * 判断网络是否可用 徐亚root权限
      * <p>需添加权限 {@code <uses-permission android:name="android.permission.INTERNET"/>}</p>
      *
      * @return {@code true}: 可用<br>{@code false}: 不可用

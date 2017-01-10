@@ -1,4 +1,4 @@
-package com.flydance.tutu.AppUI;
+package com.flydance.tutu.widget;
 
 import com.flydance.tutu.app.App;
 import com.sdsmdg.tastytoast.TastyToast;

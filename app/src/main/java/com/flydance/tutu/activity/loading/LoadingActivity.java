@@ -1,4 +1,4 @@
-package com.flydance.tutu.loading;
+package com.flydance.tutu.activity.loading;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.flydance.tutu.R;
 import com.flydance.tutu.base.BaseActivity;
-import com.flydance.tutu.login.LoginActivity;
+import com.flydance.tutu.activity.login.LoginActivity;
 
 import butterknife.Bind;
 import cn.bmob.v3.Bmob;

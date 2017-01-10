@@ -1,4 +1,4 @@
-package com.flydance.tutu.login;
+package com.flydance.tutu.activity.regist;
 
 import com.flydance.tutu.base.BaseView;
 import com.flydance.tutu.base.IBasePresenter;
@@ -7,23 +7,21 @@ import com.flydance.tutu.base.IBasePresenter;
  * Created by tutu on 2016/12/31.
  */
 
-public class LoginContract {
+public class RegistContract {
 	interface Presenter extends IBasePresenter {
-		void login(String userName, String userPsw);
+		void regist(String userName, String userPsw);
 	}
 
 	interface View extends BaseView<Presenter> {
-		void onLoginSuccess();
+		void onRegistSuccess();
 
-		void onLoginFail(String msg);
+		void onRegistFail(String msg);
 
 		String getUserName();
 
 		String getUserPsw();
 
 		void setUserName(String userName);
-
-		void setPsw(String psw);
 
 		void showLoading(String msg);
 

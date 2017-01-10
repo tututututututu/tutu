@@ -1,4 +1,4 @@
-package com.flydance.tutu.login;
+package com.flydance.tutu.activity.login;
 
 import com.flydance.basemodule.utils.L;
 import com.flydance.tutu.bean.UserBean;

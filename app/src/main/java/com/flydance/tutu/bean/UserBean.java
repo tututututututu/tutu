@@ -19,7 +19,7 @@ public class UserBean extends BmobUser {
 	String extra;
 
 
-	public UserBean(){
+	public UserBean() {
 
 	}
 

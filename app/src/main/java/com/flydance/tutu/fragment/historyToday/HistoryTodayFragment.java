@@ -1,4 +1,4 @@
-package com.flydance.tutu.historyToday;
+package com.flydance.tutu.fragment.historyToday;
 
 import com.flydance.tutu.R;
 import com.flydance.tutu.base.BaseFragment;

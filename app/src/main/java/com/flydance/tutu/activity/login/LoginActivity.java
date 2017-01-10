@@ -1,4 +1,4 @@
-package com.flydance.tutu.login;
+package com.flydance.tutu.activity.login;
 
 import android.content.Intent;
 import android.view.View;
@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.flydance.basemodule.utils.ResourceUtils;
 import com.flydance.tutu.R;
+import com.flydance.tutu.activity.main.MainActivity;
+import com.flydance.tutu.activity.regist.RegistActivity;
 import com.flydance.tutu.app.Constant;
 import com.flydance.tutu.base.BaseActivity;
-import com.flydance.tutu.main.MainActivity;
-import com.flydance.tutu.regist.RegistActivity;
+import com.flydance.tutu.widget.Toast;
 import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.concurrent.TimeUnit;
@@ -98,6 +99,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
 	@Override
 	public void onLoginFail(String msg) {
+		Toast.showErrorToast(msg);
 		cancelLoading();
 	}
 

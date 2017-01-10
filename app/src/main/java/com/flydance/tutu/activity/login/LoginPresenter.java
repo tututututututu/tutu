@@ -1,15 +1,14 @@
-package com.flydance.tutu.login;
+package com.flydance.tutu.activity.login;
 
 import android.text.TextUtils;
 
+import com.flydance.basemodule.http.RxHelper;
 import com.flydance.basemodule.utils.RegexUtils;
 import com.flydance.basemodule.utils.SPUtils;
-import com.flydance.tutu.AppUI.Toast;
 import com.flydance.tutu.R;
 import com.flydance.tutu.app.Constant;
 import com.flydance.tutu.bean.UserBean;
-import com.flydance.tutu.net.HanderError;
-import com.flydance.tutu.net.RxHelper;
+import com.flydance.tutu.widget.Toast;
 
 import rx.functions.Action1;
 
@@ -48,8 +47,8 @@ public class LoginPresenter implements LoginContract.Presenter {
 
 		view.showLoading("登陆中...");
 		loginModel.login(userName, userPsw)
-			.compose(RxHelper.ThreadScheduler())
-			.onErrorReturn(new HanderError())
+			.compose(RxHelper.<UserBean>switchSchedulers())
+
 			.subscribe(new Action1<Object>() {
 				@Override
 				public void call(Object o) {

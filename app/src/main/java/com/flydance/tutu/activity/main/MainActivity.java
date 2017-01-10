@@ -1,4 +1,4 @@
-package com.flydance.tutu.main;
+package com.flydance.tutu.activity.main;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +9,7 @@ import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.flydance.tutu.R;
-import com.flydance.tutu.historyToday.HistoryTodayFragment;
+import com.flydance.tutu.fragment.historyToday.HistoryTodayFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

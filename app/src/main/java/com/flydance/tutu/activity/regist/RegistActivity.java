@@ -1,4 +1,4 @@
-package com.flydance.tutu.regist;
+package com.flydance.tutu.activity.regist;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.flydance.basemodule.base.ActivityStack;
 import com.flydance.basemodule.utils.ResourceUtils;
-import com.flydance.tutu.AppUI.Toast;
+import com.flydance.tutu.widget.Toast;
 import com.flydance.tutu.R;
 import com.flydance.tutu.app.Constant;
 import com.flydance.tutu.base.BaseActivity;
-import com.flydance.tutu.main.MainActivity;
+import com.flydance.tutu.activity.main.MainActivity;
 import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.concurrent.TimeUnit;
@@ -74,7 +74,7 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 
-		Activity activity = ActivityStack.findActivity("com.flydance.tutu.login.LoginActivity");
+		Activity activity = ActivityStack.findActivity("com.flydance.tutu.activity.login.LoginActivity");
 		if (activity != null) {
 			activity.finish();
 		}
@@ -84,7 +84,7 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
 
 	@Override
 	public void onRegistFail(String msg) {
-
+		Toast.showErrorToast(msg);
 		//注册失败
 	}
 
