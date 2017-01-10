@@ -7,44 +7,43 @@ import java.io.Serializable;
  */
 
 public class BaseResponse<T> implements Serializable {
-	boolean success;
-	String code;
-	String msg;
-	T data;
+	String reason;
+	String error_code;
+	T result;
 
 	public BaseResponse() {
 	}
 
-	public boolean isSuccess() {
-
-		return success;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
-	public String getCode() {
-		return code;
+	public String getError_code() {
+		return error_code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setError_code(String error_code) {
+		this.error_code = error_code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public T getResult() {
+		return result;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setResult(T result) {
+		this.result = result;
 	}
 
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
+	@Override
+	public String toString() {
+		return "BaseResponse{" +
+				"reason='" + reason + '\'' +
+				", error_code='" + error_code + '\'' +
+				", result=" + result +
+				'}';
 	}
 }

@@ -4,6 +4,8 @@ import com.flydance.basemodule.http.BaseResponse;
 import com.flydance.tutu.bean.HistoryTodayListBean;
 import com.flydance.tutu.http.Api;
 
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -12,7 +14,7 @@ import rx.Observable;
 
 public class HistoryTodayModel {
 
-	public static Observable<BaseResponse<HistoryTodayListBean>> getHistoryTodayList(String date) {
+	public static Observable<BaseResponse<List<HistoryTodayListBean>>> getHistoryTodayList(String date) {
 		return Api.getInstance().getHistoryTodayList(date);
 	}
 }

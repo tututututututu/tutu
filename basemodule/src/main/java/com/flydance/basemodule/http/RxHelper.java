@@ -17,11 +17,11 @@ public class RxHelper {
 		return baseResponseObservable -> baseResponseObservable.flatMap(new Func1<BaseResponse<T>, Observable<T>>() {
 			@Override
 			public Observable<T> call(BaseResponse<T> tBaseResponse) {
-				if (tBaseResponse.isSuccess()) {
-					return createData(tBaseResponse.data);
+				if ("success".equals(tBaseResponse.getReason())) {
+					return createData(tBaseResponse.getResult());
 				} else {
-					return Observable.error(new BussinessException(tBaseResponse.getCode(), tBaseResponse
-						.getMsg()));
+					return Observable.error(new BussinessException(tBaseResponse.getError_code(), tBaseResponse
+						.getReason()));
 				}
 			}
 		}).compose(switchSchedulers());

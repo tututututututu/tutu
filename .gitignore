@@ -48,3 +48,8 @@ signing.properties
 *~
 #extras/external_tagsoup/
 src/main/java/com/flydance/basemodule/utils/ResourceUtils.java
+app/libs/
+basemodule/libs/
+gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew.bat
