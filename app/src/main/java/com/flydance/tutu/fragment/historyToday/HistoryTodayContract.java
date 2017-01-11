@@ -1,6 +1,6 @@
 package com.flydance.tutu.fragment.historyToday;
 
-import com.flydance.tutu.base.BaseView;
+import com.flydance.tutu.base.BaseStatusView;
 import com.flydance.tutu.base.IBasePresenter;
 import com.flydance.tutu.bean.HistoryTodayListBean;
 
@@ -17,11 +17,8 @@ public class HistoryTodayContract {
 	}
 
 
-	interface View extends BaseView<Presenter> {
-		void onSucceess(List<HistoryTodayListBean> listBeen);
-
-		void onFail(String msg);
-
+	interface View extends BaseStatusView<Presenter> {
+		void onLoadData(List<HistoryTodayListBean> listBeen);
 		String getDate();
 	}
 }

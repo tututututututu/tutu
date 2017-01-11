@@ -12,33 +12,40 @@ import java.util.List;
 
 public class HistoryTodayPresenter implements HistoryTodayContract.Presenter {
 
-	private HistoryTodayContract.View view;
+    private HistoryTodayContract.View view;
 
-	public HistoryTodayPresenter(HistoryTodayContract.View view) {
-		this.view = view;
-	}
+    public HistoryTodayPresenter(HistoryTodayContract.View view) {
+        this.view = view;
+    }
 
-	@Override
-	public void requestList(String date) {
-		HistoryTodayModel.getHistoryTodayList(date)
-			.compose(RxHelper.<List<HistoryTodayListBean>>RxHandleResult())
-			.subscribe(new RxSubscribe<List<HistoryTodayListBean>>() {
+    @Override
+    public void requestList(String date) {
+        view.onLoading();
+        HistoryTodayModel.getHistoryTodayList(date)
+                .compose(RxHelper.<List<HistoryTodayListBean>>RxHandleResult())
+                .subscribe(new RxSubscribe<List<HistoryTodayListBean>>() {
 
-				@Override
-				protected void onSuccess(List<HistoryTodayListBean> historyTodayListBean) {
-					//L.ir(historyTodayListBean.toString());
-					view.onSucceess(historyTodayListBean);
-				}
+                    @Override
+                    protected void onSuccess(List<HistoryTodayListBean> historyTodayListBean) {
+                        view.onLoadData(historyTodayListBean);
+                        if (historyTodayListBean != null && historyTodayListBean.size() > 0) {
+                            view.onSucceess();
+                        } else {
+                            view.onEmptyData();
+                        }
 
-				@Override
-				protected void onFail(String msg) {
+                    }
 
-				}
-			});
-	}
+                    @Override
+                    protected void onFail(String msg) {
+                        view.onFail(msg);
+                        view.onError(msg);
+                    }
+                });
+    }
 
-	@Override
-	public void start() {
-		requestList(view.getDate());
-	}
+    @Override
+    public void start() {
+        requestList(view.getDate());
+    }
 }

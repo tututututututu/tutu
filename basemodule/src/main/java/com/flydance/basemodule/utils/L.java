@@ -13,11 +13,11 @@ public class L {
 		Logger
 			//.init(YOUR_TAG)                 // default PRETTYLOGGER or use just init()
 			.init()                 // default PRETTYLOGGER or use just init()
-			.methodCount(2)                 // default 2
+			.methodCount(3)                 // default 2  总共打野的调用堆栈方法数
 			//.hideThreadInfo()               // default shown
 			//.logLevel(LogLevel.NONE)        // default LogLevel.FULL
 			.logLevel(LogLevel.FULL)        // default LogLevel.FULL
-			.methodOffset(2);                // default 0
+			.methodOffset(2);                // default 0  回退的方法数
 		//.logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter
 	}
 

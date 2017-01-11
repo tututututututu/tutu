@@ -1,5 +1,7 @@
 package com.flydance.basemodule.http;
 
+import com.flydance.basemodule.utils.L;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -32,6 +34,7 @@ public class RxHelper {
 			@Override
 			public void call(Subscriber<? super T> subscriber) {
 				try {
+					L.ir(data.toString());
 					subscriber.onNext(data);
 					subscriber.onCompleted();
 				} catch (Exception e) {

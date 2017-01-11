@@ -36,14 +36,7 @@ public class Api {
     }
 
     private Api() {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(
-//                new HttpLoggingInterceptor.Logger() {
-//            @Override
-//            public void log(String message) {
-//                L.ir("访问日志="+message);
-//            }
-//        }
-        );
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient client = new OkHttpClient.Builder()
