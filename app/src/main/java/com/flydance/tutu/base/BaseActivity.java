@@ -131,12 +131,12 @@ public abstract class BaseActivity extends AbsActivity {
 	@Override
 	protected void onDestroy() {
 		hideKeyBoard();
-		super.onDestroy();
 		ButterKnife.unbind(this);
 		subscriptionList.unsubscribe();
 
 		if (svProgressHUD != null && svProgressHUD.isShowing()) {
 			svProgressHUD.dismiss();
 		}
+		super.onDestroy();
 	}
 }
