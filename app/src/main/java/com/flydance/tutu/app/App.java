@@ -5,7 +5,7 @@ import android.app.Application;
 import com.flydance.basemodule.utils.L;
 import com.flydance.basemodule.utils.SPUtils;
 import com.flydance.basemodule.utils.Utils;
-import com.flydance.basemodule.widget.LoadingLayout;
+import com.flydance.basemodule.widget.loadingLayout.LoadingLayout;
 import com.flydance.tutu.R;
 
 /**

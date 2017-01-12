@@ -1,4 +1,4 @@
-package com.flydance.basemodule.widget;
+package com.flydance.basemodule.widget.loadingLayout;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

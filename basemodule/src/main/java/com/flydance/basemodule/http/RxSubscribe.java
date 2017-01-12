@@ -13,6 +13,8 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
 
 	protected abstract void onFail(String msg);
 
+	protected abstract void onNetError(String msg);
+
 	@Override
 	public void onNext(T t) {
 		onSuccess(t);
@@ -23,7 +25,7 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
 	public void onError(Throwable e) {
 		e.printStackTrace();
 		if (!NetworkUtils.isConnected()) {
-			onFail("网络不可用");
+			onNetError("链接网络失败");
 		} else if (e instanceof BussinessException) {
 			onFail(e.getMessage());
 		} else {

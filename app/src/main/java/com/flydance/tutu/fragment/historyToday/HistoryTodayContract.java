@@ -13,12 +13,17 @@ import java.util.List;
 public class HistoryTodayContract {
 
 	interface Presenter extends IBasePresenter {
-		void requestList(String date);
+		/**
+		 * @param date 日期
+		 * @param hasData 是否已经有数据了
+		 */
+		void requestList(String date,boolean hasData);
 	}
 
 
 	interface View extends BaseStatusView<Presenter> {
 		void onLoadData(List<HistoryTodayListBean> listBeen);
+		void onFail(String msg);
 		String getDate();
 	}
 }

@@ -138,5 +138,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 		this.presenter = presenter;
 	}
 
+	@Override
+	public void onEmptyData() {
+
+	}
+
 }
 

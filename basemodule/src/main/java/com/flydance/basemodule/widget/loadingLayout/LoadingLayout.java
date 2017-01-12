@@ -1,4 +1,4 @@
-package com.flydance.basemodule.widget;
+package com.flydance.basemodule.widget.loadingLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.flydance.basemodule.R;
 
 

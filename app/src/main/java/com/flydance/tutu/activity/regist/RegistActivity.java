@@ -117,4 +117,9 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
 	public void setPresenter(RegistContract.Presenter presenter) {
 		this.presenter = presenter;
 	}
+
+	@Override
+	public void onEmptyData() {
+
+	}
 }
