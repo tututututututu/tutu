@@ -1,0 +1,39 @@
+
+这里对图片加载库的封装做一些说明
+
+1.参考来自 http://blog.csdn.net/s003603u/article/details/53436089这篇博客。
+2.使用时需要配置manifests 如下
+
+<manifest ...>
+    <!-- ... permissions -->
+    <application ...>
+             <!-- 自定义GlideModule -->
+        <meta-data
+            android:name="com.flydance.basemodule.imageLoader.imageloader.MyGlideModule"
+            android:value="GlideModule" />
+        <!-- 自定义GlideModule -->
+        <!-- ... activities and other components -->
+    </application>
+</manifest>
+
+
+
+3.Glide 自己内部使用了tag 所以在我们使用的时候去settag报错的问题,请参照如下方法解决
+  在AndroidManifest.xml中加入
+
+    <application
+           android:name=".App">
+
+    然后在App中添加如下代码：
+    public class App extends Application {
+       @Override public void onCreate() {
+         super.onCreate();
+         ViewTarget.setTagId(R.id.glide_tag);
+     }
+    }
+
+    在src/main/values/ids.xml添加如下代码：
+
+    <resources>
+       <item type="id" name="glide_tag" />
+    </resources>

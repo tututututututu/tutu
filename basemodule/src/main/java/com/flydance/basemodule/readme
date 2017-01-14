@@ -1,0 +1,6 @@
+1.在集成的时候如果遇到
+    Warning:Conflict with dependency 'com.google.code.findbugs:jsr305'. Resolved versions for app (3.0.1) and test app (2.0.1) differ. See http://g.co/androidstudio/app-test-app-conflict for details.
+  这个错误 请在app的build.gradle 下的android 节点下添加如下配置
+    configurations.all {
+           resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+     }

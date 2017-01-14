@@ -24,7 +24,7 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 
 	private LinearLayout mContainer;
 	private ImageView mArrowImageView;
-	private SimpleViewSwitcher mProgressBar;
+	private com.flydance.basemodule.widget.xRecyclerView.SimpleViewSwitcher mProgressBar;
 	private TextView mStatusTextView;
 	private int mState = STATE_NORMAL;
 
@@ -67,10 +67,10 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 		mStatusTextView = (TextView)findViewById(R.id.refresh_status_textview);
 
         //init the progress view
-		mProgressBar = (SimpleViewSwitcher)findViewById(R.id.listview_header_progressbar);
+		mProgressBar = (com.flydance.basemodule.widget.xRecyclerView.SimpleViewSwitcher)findViewById(R.id.listview_header_progressbar);
         AVLoadingIndicatorView progressView = new  AVLoadingIndicatorView(getContext());
         progressView.setIndicatorColor(0xffB5B5B5);
-        progressView.setIndicatorId(ProgressStyle.BallSpinFadeLoader);
+        progressView.setIndicatorId(com.flydance.basemodule.widget.xRecyclerView.ProgressStyle.BallSpinFadeLoader);
         mProgressBar.setView(progressView);
 
 
@@ -89,7 +89,7 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 	}
 
     public void setProgressStyle(int style) {
-        if(style == ProgressStyle.SysProgress){
+        if(style == com.flydance.basemodule.widget.xRecyclerView.ProgressStyle.SysProgress){
             mProgressBar.setView(new ProgressBar(getContext(), null, android.R.attr.progressBarStyle));
         }else{
             AVLoadingIndicatorView progressView = new  AVLoadingIndicatorView(this.getContext());
