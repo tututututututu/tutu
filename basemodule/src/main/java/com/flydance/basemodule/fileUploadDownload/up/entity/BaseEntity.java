@@ -1,6 +1,6 @@
 package com.flydance.basemodule.fileUploadDownload.up.entity;
 
-import com.flydance.basemodule.fileUploadDownload.up.exception.HttpTimeException;
+import com.flydance.basemodule.fileUploadDownload.exception.HttpTimeException;
 import com.flydance.basemodule.fileUploadDownload.up.http.HttpService;
 import com.flydance.basemodule.fileUploadDownload.up.listener.HttpOnNextListener;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;

@@ -1,9 +1,10 @@
 package com.flydance.basemodule.fileUploadDownload.down.downlaod;
 
-import com.example.retrofit.downlaod.DownLoadListener.DownloadInterceptor;
-import com.example.retrofit.exception.HttpTimeException;
-import com.example.retrofit.exception.RetryWhenNetworkException;
-import com.example.retrofit.http.HttpService;
+
+import com.flydance.basemodule.fileUploadDownload.down.downlaod.DownLoadListener.DownloadInterceptor;
+import com.flydance.basemodule.fileUploadDownload.down.http.HttpService;
+import com.flydance.basemodule.fileUploadDownload.exception.HttpTimeException;
+import com.flydance.basemodule.fileUploadDownload.exception.RetryWhenNetworkException;
 
 import java.io.File;
 import java.io.IOException;

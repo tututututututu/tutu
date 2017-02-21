@@ -7,6 +7,7 @@ import com.flydance.basemodule.utils.SPUtils;
 import com.flydance.basemodule.utils.Utils;
 import com.flydance.basemodule.widget.loadingLayout.LoadingLayout;
 import com.flydance.tutu.R;
+import com.way.chat.manager.Manager;
 
 /**
  * Created by tutu on 2016/12/29.
@@ -24,6 +25,12 @@ public class App extends Application {
         initSP();
         initLoger();
         initLoadingLayout();
+
+        initDao();
+    }
+
+    private void initDao() {
+        Manager.setupDatabase(app);
     }
 
     private void initLoadingLayout() {

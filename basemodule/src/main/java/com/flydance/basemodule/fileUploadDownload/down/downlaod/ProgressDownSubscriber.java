@@ -1,8 +1,8 @@
 package com.flydance.basemodule.fileUploadDownload.down.downlaod;
 
 
-import com.example.retrofit.downlaod.DownLoadListener.DownloadProgressListener;
-import com.example.retrofit.listener.HttpProgressOnNextListener;
+import com.flydance.basemodule.fileUploadDownload.down.downlaod.DownLoadListener.DownloadProgressListener;
+import com.flydance.basemodule.fileUploadDownload.down.listener.HttpProgressOnNextListener;
 
 import java.lang.ref.WeakReference;
 

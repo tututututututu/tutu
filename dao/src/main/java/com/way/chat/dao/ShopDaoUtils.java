@@ -16,7 +16,7 @@ public class ShopDaoUtils {
 	 *
 	 * @param shop
 	 */
-	public static void insertLove(Shop shop) {
+	public static void insertShop(Shop shop) {
 		Manager.getDaoInstant().getShopDao().insertOrReplace(shop);
 	}
 
@@ -25,7 +25,7 @@ public class ShopDaoUtils {
 	 *
 	 * @param id
 	 */
-	public static void deleteLove(long id) {
+	public static void deleteShop(long id) {
 		Manager.getDaoInstant().getShopDao().deleteByKey(id);
 	}
 
@@ -34,7 +34,7 @@ public class ShopDaoUtils {
 	 *
 	 * @param shop
 	 */
-	public static void updateLove(Shop shop) {
+	public static void updateShop(Shop shop) {
 		Manager.getDaoInstant().getShopDao().update(shop);
 	}
 
@@ -43,7 +43,7 @@ public class ShopDaoUtils {
 	 *
 	 * @return
 	 */
-	public static List<Shop> queryLove() {
+	public static List<Shop> queryShop() {
 		return Manager.getDaoInstant().getShopDao().queryBuilder().where(ShopDao.Properties.Type.eq(Shop.TYPE_LOVE))
 			.list();
 	}
@@ -56,4 +56,4 @@ public class ShopDaoUtils {
 	}
 
 }
-}
+

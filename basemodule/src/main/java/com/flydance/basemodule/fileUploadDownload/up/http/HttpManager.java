@@ -1,7 +1,7 @@
 package com.flydance.basemodule.fileUploadDownload.up.http;
 
+import com.flydance.basemodule.fileUploadDownload.exception.RetryWhenNetworkException;
 import com.flydance.basemodule.fileUploadDownload.up.entity.BaseEntity;
-import com.flydance.basemodule.fileUploadDownload.up.exception.RetryWhenNetworkException;
 import com.flydance.basemodule.fileUploadDownload.up.subscribers.ProgressSubscriber;
 
 import java.util.concurrent.TimeUnit;
