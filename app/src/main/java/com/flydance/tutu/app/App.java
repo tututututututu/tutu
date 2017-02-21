@@ -26,7 +26,7 @@ public class App extends Application {
         initLoger();
         initLoadingLayout();
 
-        initDao();
+        //initDao();
     }
 
     private void initDao() {
